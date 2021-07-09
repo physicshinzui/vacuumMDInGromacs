@@ -1,0 +1,42 @@
+title      = LangevinVacuum
+;---Run parameters---
+integrator = sd     ; Stochastic or velocity Langevin dynamics
+nsteps     = 25000000  ; 2 * 50000 = 100 ps
+dt         = 0.002  ; 0.002     = 2 fs
+
+;---Output control---
+nstxout-compressed = 500
+compressed-x-grps  = System
+nstlog             = 500
+nstcalcenergy      = 500
+nstenergy          = 500
+
+;---LINCS Constraints---
+continuation         = no      ; Restarting after equilibriation
+constraint_algorithm = lincs   ; holonomic constraints
+constraints          = h-bonds ; h bonds constrained
+lincs_iter           = 1       ; accuracy of LINCS
+lincs_order          = 4       ; also related to accuracy
+
+;---Interaction parameters---
+nstlist         = 1        ; Frequency to update the neighbor list and long range forces
+cutoff-scheme   = Verlet   ; Buffered neighbor searching
+ns_type         = grid     ; Method to determine neighbor list (simple, grid)
+coulombtype     = Cut-off  ; Treatment of long range electrostatic interactions
+rcoulomb        = 333.3    ; Short-range electrostatic cut-off
+vdwtype         = Cut-off  ; Treatment of long range Van der Waals interactions
+rvdw            = 333.3    ; Short-range Van der Waals cut-off
+pbc             = xyz      ; Periodic Boundary Conditions in all 3 dimensions
+rlist           = 333.3
+;DispCorr        = Ener     ; account for cut-off vdW scheme
+
+;---Initial velocity---
+gen_vel         = yes      ; Velocity generation
+gen-temp        = 300.0
+gen-seed        = 1234
+
+;---Langevin dynamics---
+tc-grps         = System
+tau_t           = 2.0       ; When used as a thermostat, an appropriate value for tau-t is 2 ps
+ref_t           = 300.0     ;reference temperature, one for each group, in K
+ld_seed         = 1212      ; random generator is initialised with this seed
