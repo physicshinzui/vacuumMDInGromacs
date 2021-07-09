@@ -15,7 +15,7 @@ nstenergy          = 500
 continuation         = no      ; Restarting after equilibriation
 constraint_algorithm = lincs   ; holonomic constraints
 constraints          = h-bonds ; h bonds constrained
-lincs_iter           = 1       ; accuracy of LINCS
+lincs_iter           = 2       ; accuracy of LINCS
 lincs_order          = 4       ; also related to accuracy
 
 ;---Interaction parameters---
